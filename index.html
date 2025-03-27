@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <title>Daily useless facts</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            text-align: center;
+            padding: 20px;
+            background: linear-gradient(to right, #6a11cb, #2575fc);
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            max-width: 600px;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(10px);
+        }
+
+        h1 {
+            font-size: 28px;
+            margin-bottom: 20px;
+        }
+
+        p {
+            font-size: 20px;
+            font-style: italic;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 10px;
+            color: #fff;
+        }
+
+        button {
+            margin-top: 20px;
+            padding: 12px 20px;
+            font-size: 18px;
+            cursor: pointer;
+            border: none;
+            background: #ffcc00;
+            color: #333;
+            border-radius: 8px;
+            transition: 0.3s ease;
+        }
+
+        button:hover {
+            background: #ffdd44;
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>Daily useless facts</h1>
+    <p id="fact">Loading...</p>
+    <button onclick="getFact()">More informations</button>
+</div>
+<script>
+    async function getFact() {
+        const factUrl = "https://uselessfacts.jsph.pl/random.json?language=en";
+
+        try {
+            const response = await fetch(factUrl);
+            const data = await response.json();
+            document.getElementById("fact").innerText = `"${data.text}"`;
+        } catch (error) {
+            document.getElementById("fact").innerText = "Bilgi alınamadı!";
+        }
+    }
+
+    // Sayfa açıldığında otomatik olarak bilgi yükle
+    getFact();
+</script>
+</body>
+</html>
